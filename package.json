@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/hmareddy-amazon/hack-video-upload#readme",
   "dependencies": {
-    "amazon-chime-sdk-js": "^1.3.0"
+    "amazon-chime-sdk-js": "^1.3.0",
+    "aws-sdk": "^2.658.0"
   }
 }
