@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 const AWS = require('aws-sdk');
+const transcribeService = new AWS.TranscribeService();
 
 /**
  * S3Upload Class
@@ -26,12 +27,41 @@ class S3Uploader {
                 console.log('[stream upload process] - failure - error handling on failure', err);
             } else {
                 console.log(`[stream upload process] - success - uploaded the file to: ${data.Location}`);
+
+                this.transcribeVideo().then(r => console.log('[stream transcription process] - completed'));
+
                 process.exit();
             }
         });
         managedUpload.on('httpUploadProgress', function (event) {
             console.log(`[stream upload process]: on httpUploadProgress ${event.loaded} bytes`);
         });
+    }
+
+    /**
+     * Begins a transcription of the meeting.
+     *
+     * @returns {Promise<PromiseResult<TranscribeService.StartTranscriptionJobResponse, AWSError>>} Promise to the transcription job
+     */
+    transcribeVideo() {
+        console.log('[stream scribe process] - started');
+        const meetingUrl = [
+            'https://s3.amazonaws.com',
+            this.bucket,
+            this.key
+        ].join('/');
+
+        const transcriptionJobName = this.key;
+
+        return transcribeService.startTranscriptionJob({
+            LanguageCode: 'en-US',
+            Media: { MediaFileUri: meetingUrl },
+            MediaFormat: 'mp4',
+            transcriptionJobName,
+            MediaSampleRateHertz: 8000,
+            OutputBucketName: this.bucket,
+        }).promise();
+
     }
 }
 
