@@ -1,0 +1,22 @@
+{
+  "name": "hack-video-upload",
+  "version": "1.0.0",
+  "description": "upload video from chime automatically to broadcast",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hmareddy-amazon/hack-video-upload.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hmareddy-amazon/hack-video-upload/issues"
+  },
+  "homepage": "https://github.com/hmareddy-amazon/hack-video-upload#readme",
+  "dependencies": {
+    "amazon-chime-sdk-js": "^1.3.0"
+  }
+}
