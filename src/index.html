@@ -42,12 +42,12 @@ function setChannel() {
         alert("No changes were made.")
     } else {
       sessionStorage.setItem("channel", channel);
-  	  alert("Broadcast Channel successfully set! Your Chime meeting recordings will now be uploaded to " + channel);
+  	  alert("Broadcast Channel successfully set! Your Chime meeting recordings will now be uploaded to \n\n" + channel);
     }
 
   } else {
-  document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
-}
+    document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+  }
 }
 </script>
 
