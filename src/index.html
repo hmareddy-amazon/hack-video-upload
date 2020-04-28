@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <title>Chime Auto-Uploader</title>
+    <!DOCTYPE html>
+</head>
+<body>
+
+<div id="demo" style="text-align:center;">
+    <h1 id="title">Chime Auto-Uploader</h1>
+    <button onclick="myFunction()">Chime Auto-Uploader</button>
+
+</div>
+
+<script>
+function myFunction() {
+  var txt;
+  var defaultChannel = "https://broadcast.amazon.com/channels/<CHANNEL_ID>"
+  var channel = prompt("Welcome to the Chime Recording Auto-Uploader! \n \nPlease enter your Broadcast Channel:", defaultChannel);
+
+  if (channel == null || channel == "" || channel == defaultChannel) {
+  	alert("You have now canceled Auto-upload. \n\nYou can always set this again later.")
+  } else {
+  	alert("Broadcast Channel successfully set! Your Chime meeting recordings will now be uploaded to " + channel);
+  }
+}
+</script>
+
+</body>
+</html>
