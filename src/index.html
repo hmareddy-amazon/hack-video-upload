@@ -11,21 +11,43 @@
 
 <div id="demo" style="text-align:center;">
     <h1 id="title">Chime Auto-Uploader</h1>
-    <button onclick="myFunction()">Chime Auto-Uploader</button>
+    <button onclick="setChannel()">Chime Auto-Uploader</button>
 
 </div>
 
 <script>
-function myFunction() {
-  var txt;
-  var defaultChannel = "https://broadcast.amazon.com/channels/<CHANNEL_ID>"
-  var channel = prompt("Welcome to the Chime Recording Auto-Uploader! \n \nPlease enter your Broadcast Channel:", defaultChannel);
-
-  if (channel == null || channel == "" || channel == defaultChannel) {
-  	alert("You have now canceled Auto-upload. \n\nYou can always set this again later.")
-  } else {
-  	alert("Broadcast Channel successfully set! Your Chime meeting recordings will now be uploaded to " + channel);
+function setChannel() {
+  if (sessionStorage.getItem("channel") === null) {
+    sessionStorage.setItem("channel", "");
   }
+  var defaultChannel = "https://broadcast.amazon.com/channels/<CHANNEL_ID>"
+
+  if (typeof(Storage) !== "undefined") {
+    if(sessionStorage.getItem("channel") != "" ) {
+      var channel = prompt(
+        "Welcome to the Chime Recording Auto-Uploader! \n\n\You can change your default Broadcast Channel here:",
+        sessionStorage.getItem("channel")
+      );
+    } else {
+      var channel = prompt(
+        "Welcome to the Chime Recording Auto-Uploader! \n \nPlease enter your Broadcast Channel URL:",
+         defaultChannel
+       );
+    }
+
+    if (channel == null || channel == "" || channel == defaultChannel) {
+      sessionStorage.setItem("channel", "");
+    	alert("You have now canceled Auto-upload. \n\nYou can always set this again later.")
+    } else if (channel == sessionStorage.getItem("channel")) {
+        alert("No changes were made.")
+    } else {
+      sessionStorage.setItem("channel", channel);
+  	  alert("Broadcast Channel successfully set! Your Chime meeting recordings will now be uploaded to " + channel);
+    }
+
+  } else {
+  document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+}
 }
 </script>
 
